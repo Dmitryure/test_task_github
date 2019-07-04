@@ -8,13 +8,24 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer from './redux/reducers/rootReducer';
 import Login from './Login'
 
-const store = createStore(rootReducer, composeWithDevTools())
+
+const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {}
+const store = createStore(rootReducer, persistedState, composeWithDevTools())
 
 
 class Root extends React.Component {
     state = {
         
     }
+
+    componentDidMount() {
+        const {user} = this.props
+        console.log(user)
+        if(user.loggedIn === false){
+            this.props.history.push('/login')
+        }
+    }
+
     render(){
         return(
             <Switch>
@@ -25,7 +36,17 @@ class Root extends React.Component {
     }
 }
 
-const RootWithRouter = withRouter(connect(null, null)(Root))
+const mapStateToProps = state => ({
+    user: state.user
+})
+
+store.subscribe(()=>{
+    localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+  })
+
+
+
+const RootWithRouter = withRouter(connect(mapStateToProps, null)(Root))
 
 ReactDOM.render(
     <Provider store={store}>

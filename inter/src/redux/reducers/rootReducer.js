@@ -6,9 +6,11 @@ const initialState = {
 }
 
 const user_reducer = (state = initialState, action) => {
+    console.log(action)
     switch (action.type) {
         case actionTypes.SET_USER:
         return {
+            ...state,
             loggedIn: true
         }
         default:

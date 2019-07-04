@@ -20,7 +20,8 @@ class Login extends React.Component {
         const {user, password} = this.state
         if(user === 'admin' && password === '123'){
             console.log('logged in ')
-            login()
+            this.props.login()
+            this.props.history.push('/')
         }else{
             this.setState({loginError:true})
         }
@@ -54,6 +55,8 @@ class Login extends React.Component {
     }
 }
 
+const mapDispatchToProps = dispatch => ({
+    login: () => dispatch(login()),
+})
 
-
-export default connect (null, {login})(Login)
+export default connect (null, mapDispatchToProps)(Login)
