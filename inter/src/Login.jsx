@@ -1,6 +1,7 @@
 import React from 'react'
 import { Grid, Form, Segment, Button, Icon, Header } from 'semantic-ui-react'
-
+import {connect} from 'react-redux'
+import {login} from './redux/actions/login'
 
 class Login extends React.Component {
     state = {
@@ -15,9 +16,14 @@ class Login extends React.Component {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    handleLogin = (e) => {
+    handleLogin = () => {
         const {user, password} = this.state
-        if(user ===)
+        if(user === 'admin' && password === '123'){
+            console.log('logged in ')
+            login()
+        }else{
+            this.setState({loginError:true})
+        }
     }
 
     render() {
@@ -38,7 +44,7 @@ class Login extends React.Component {
 
                                 <Form.Input fluid name='password' icon='lock' iconPosition='left' placeholder="password" value={password}
                                     onChange={this.handleChange} type='password' />
-                                <Button disabled={loading} className={loading ? 'loading' : ''} color='violet' fluid_size='large'> Submit </Button>
+                                <Button disabled={loading} className={loading ? 'loading' : ''} color='violet' fluid_size='large' onClick = {this.handleLogin}> Submit </Button>
                             </Segment>
                         </Form>
                     </Grid.Column>
@@ -50,4 +56,4 @@ class Login extends React.Component {
 
 
 
-export default Login
+export default connect (null, {login})(Login)
