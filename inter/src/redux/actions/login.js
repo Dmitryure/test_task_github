@@ -1,7 +1,6 @@
 import * as actionTypes from './actionTypes'
 
-export const login = (e) => {
-    console.log('123')
+export const login = () => {
     return {
         type: actionTypes.SET_USER,
     }

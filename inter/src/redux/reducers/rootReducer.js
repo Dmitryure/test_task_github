@@ -9,10 +9,15 @@ const user_reducer = (state = initialState, action) => {
     console.log(action)
     switch (action.type) {
         case actionTypes.SET_USER:
-        return {
-            ...state,
-            loggedIn: true
-        }
+            return {
+                ...state,
+                loggedIn: true
+            }
+        case actionTypes.LOGOUT_USER:
+            return {
+                ...state,
+                loggedIn:false
+            }
         default:
             return state
     }
