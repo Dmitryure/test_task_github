@@ -6,6 +6,7 @@ import Moment from 'react-moment'
 
 const OneRepo = (props) => {
     const [commitsData, setCommitsData] = useState('')
+    const [redirected, setRedirected] = useState(false)
     let id = window.location.href.match('([^/]+$)')[0]
     let repoData = {
         owner: '',
@@ -26,6 +27,8 @@ const OneRepo = (props) => {
         }
     }
 
+
+
     useEffect(() => {
         const fetchData = async () => {
             const commits = await axios(
@@ -35,25 +38,29 @@ const OneRepo = (props) => {
                 commits: commits['data']
             })
         }
+        if (!repoData.owner) {
+            props.history.push('/notfound')
+        }
         fetchData()
+
     }, [])
     console.log(commitsData.commits)
+
     return (
         <React.Fragment>
             <Button className="button icon-left"
-        onClick={props.history.goBack}>
-          Back>
-            
+                onClick={props.history.goBack}>
+                Back
             </Button>
             {commitsData ? commitsData.commits.map(commit => {
                 return (
-                    <Grid columns={3} divided key ={commit.sha}>
+                    <Grid columns={3} divided key={commit.sha}>
                         <Grid.Row>
                             <Grid.Column>
                                 {commit.author.login} <Image size={'tiny'} src={commit.author.avatar_url} />
                             </Grid.Column>
                             <Grid.Column>
-                                {commit.sha}<br/><br/>
+                                {commit.sha}<br /><br />
                                 {commit.commit.message}
                             </Grid.Column>
                             <Grid.Column>
