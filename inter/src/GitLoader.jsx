@@ -3,8 +3,10 @@ import {useSpring, animated} from 'react-spring'
 import axios from 'axios'
 import {Button} from 'semantic-ui-react'
 import Table1 from './Table1'
+import {connect} from 'react-redux'
+import {oneRepo} from './redux/actions/oneRepo'
 
-const GitLoader = () => {
+const GitLoader = (props) => {
     const [profileData, setProfileData] = useState({
         avatar_url:'',
         login:'',
@@ -15,15 +17,23 @@ const GitLoader = () => {
     const [query, setQuery] = useState('')
     const [search, setSearch] = useState('')
 
+    let config = {
+        auth: {
+            username: '',
+            password: ''
+        }
+    }
+
+    
 
 useEffect(() => {
     const fetchData = async () => {
       const profileResult = await axios(
-        `https://api.github.com/users/${search}`
+        `https://api.github.com/users/${search}`, config
       );
 
       const reposResult = await axios(
-          `https://api.github.com/users/${search}/repos`
+          `https://api.github.com/users/${search}/repos`, config
       )
 
       setProfileData({
@@ -37,7 +47,9 @@ useEffect(() => {
 
     fetchData();
   }, [search]);
-
+    if(profileData.repos){
+    props.oneRepo(profileData)
+    }
     return (
     <React.Fragment>
          <input
@@ -53,4 +65,4 @@ useEffect(() => {
     )
 }
 
-export default GitLoader
+export default connect(null, {oneRepo})(GitLoader)

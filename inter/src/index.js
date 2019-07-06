@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, withRouter } from 'react-router
 import ReactDOM from 'react-dom';
 import {Provider, connect} from 'react-redux'
 import App from './App'
+import OneRepo from './OneRepo'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer from './redux/reducers/rootReducer';
 import Login from './Login'
@@ -31,6 +32,7 @@ class Root extends React.Component {
             <Switch>
                 <Route exact path = '/' component = {App}/>
                 <Route path = '/login' component = {Login}/>
+                <Route exact path = '/:id' component = {OneRepo}/>
             </Switch>
         )
     }
