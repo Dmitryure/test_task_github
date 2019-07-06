@@ -33,8 +33,8 @@ class Root extends React.Component {
             <Switch>
                 <Route exact path='/' component={App} />
                 <Route path='/login' component={Login} />
+                <Route exact path='/repos/notfound' component={NotFound} />
                 <Route exact path='/:id' component={OneRepo} />
-                <Route exact path='/notfound' component={NotFound} />
             </Switch>
         )
     }

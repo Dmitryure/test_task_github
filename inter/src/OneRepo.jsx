@@ -39,7 +39,7 @@ const OneRepo = (props) => {
             })
         }
         if (!repoData.owner) {
-            props.history.push('/notfound')
+            props.history.push('/repos/notfound')
         }
         fetchData()
 
@@ -48,10 +48,6 @@ const OneRepo = (props) => {
 
     return (
         <React.Fragment>
-            <Button className="button icon-left"
-                onClick={props.history.goBack}>
-                Back
-            </Button>
             {commitsData ? commitsData.commits.map(commit => {
                 return (
                     <Grid columns={3} divided key={commit.sha}>

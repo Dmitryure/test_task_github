@@ -8,8 +8,14 @@ class Login extends React.Component {
         user: '',
         password: '',
         loading: false,
-        loginError: false
+        loginError: false,
+    }
 
+    componentDidMount () {
+        const {user} = this.props
+        if (user.loggedIn){
+            this.props.history.push('/')
+        }
     }
 
     handleChange = (e) => {
@@ -55,8 +61,12 @@ class Login extends React.Component {
     }
 }
 
+const mapStateToProps = state => ({
+    user: state.user
+})
+
 const mapDispatchToProps = dispatch => ({
     login: () => dispatch(login()),
 })
 
-export default connect (null, mapDispatchToProps)(Login)
+export default connect (mapStateToProps, mapDispatchToProps)(Login)
