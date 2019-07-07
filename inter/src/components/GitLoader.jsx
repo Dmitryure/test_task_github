@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Button } from 'semantic-ui-react'
 import Table1 from './Table1'
 import { connect } from 'react-redux'
-import { oneRepo } from './redux/actions/oneRepo'
+import { oneRepo } from '../redux/actions/oneRepo'
 
 const GitLoader = (props) => {
     const [profileData, setProfileData] = useState({
@@ -42,6 +42,8 @@ const GitLoader = (props) => {
                         name: profileResult.name,
                         repos: reposResult
                     })
+
+                    setError('')
                 }
             } catch (error) {
                 setError(error)

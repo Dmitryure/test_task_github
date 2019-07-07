@@ -3,14 +3,14 @@ import { createStore } from 'redux';
 import { BrowserRouter as Router, Switch, Route, withRouter } from 'react-router-dom'
 import ReactDOM from 'react-dom';
 import { Provider, connect } from 'react-redux'
-import App from './App'
-import ListOfCommits from './ListOfCommits'
+import App from './components/App'
+import ListOfCommits from './components/ListOfCommits'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer from './redux/reducers/rootReducer';
-import Login from './Login'
+import Login from './components/Login'
 import { logout } from './redux/actions/logout'
 import { Button } from 'semantic-ui-react'
-import NotFound from './NotFound'
+import NotFound from './components/NotFound'
 
 
 const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {}

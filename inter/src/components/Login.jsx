@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid, Form, Segment, Button, Icon, Header } from 'semantic-ui-react'
 import {connect} from 'react-redux'
-import {login} from './redux/actions/login'
+import {login} from '../redux/actions/login'
 
 class Login extends React.Component {
     state = {
