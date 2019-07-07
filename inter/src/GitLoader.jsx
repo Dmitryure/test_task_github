@@ -28,21 +28,22 @@ const GitLoader = (props) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const profileResult = await axios(
-                `https://api.github.com/users/${search}`, config
-            );
+            if (search) {
+                const profileResult = await axios(
+                    `https://api.github.com/users/${search}`, config
+                );
 
-            const reposResult = await axios(
-                `https://api.github.com/users/${search}/repos`, config
-            )
+                const reposResult = await axios(
+                    `https://api.github.com/users/${search}/repos`, config
+                )
 
-            setProfileData({
-                avatar_url: profileResult.avatar_url,
-                login: profileResult.login,
-                name: profileResult.name,
-                repos: reposResult
-            })
-
+                setProfileData({
+                    avatar_url: profileResult.avatar_url,
+                    login: profileResult.login,
+                    name: profileResult.name,
+                    repos: reposResult
+                })
+            }
         };
 
         fetchData();

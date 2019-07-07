@@ -1,3 +1,12 @@
 body {
     padding: 50px;
 }
+
+.profilepic {
+    
+}
+
+@keyframes profilepic {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}

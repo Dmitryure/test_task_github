@@ -6,7 +6,6 @@ import Moment from 'react-moment'
 
 const OneRepo = (props) => {
     const [commitsData, setCommitsData] = useState('')
-    const [redirected, setRedirected] = useState(false)
     let id = window.location.href.match('([^/]+$)')[0]
     let repoData = {
         owner: '',
