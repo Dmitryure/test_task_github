@@ -1,5 +1,5 @@
 ## *Для начала работы*
-  `git@github.com:Dmitryure/test_task_github.git`
+  `git clone git@github.com:Dmitryure/test_task_github.git`
   
 `cd inter` 
 
