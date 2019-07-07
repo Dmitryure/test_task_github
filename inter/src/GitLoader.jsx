@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useSpring, animated } from 'react-spring'
 import axios from 'axios'
 import { Button } from 'semantic-ui-react'
 import Table1 from './Table1'

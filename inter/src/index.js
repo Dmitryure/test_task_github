@@ -4,10 +4,12 @@ import { BrowserRouter as Router, Switch, Route, withRouter } from 'react-router
 import ReactDOM from 'react-dom';
 import { Provider, connect } from 'react-redux'
 import App from './App'
-import OneRepo from './OneRepo'
+import ListOfCommits from './ListOfCommits'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer from './redux/reducers/rootReducer';
 import Login from './Login'
+import { logout } from './redux/actions/logout'
+import { Button } from 'semantic-ui-react'
 import NotFound from './NotFound'
 
 
@@ -22,20 +24,29 @@ class Root extends React.Component {
 
     componentDidMount() {
         const { user } = this.props
-        console.log(user)
         if (user.loggedIn === false) {
             this.props.history.push('/login')
         }
     }
 
+    handleLogout = () => {
+        this.props.logout()
+        this.props.history.push('/login')
+    }
+
+    
+
     render() {
         return (
-            <Switch>
-                <Route exact path='/' component={App} />
-                <Route path='/login' component={Login} />
-                <Route exact path='/repos/notfound' component={NotFound} />
-                <Route exact path='/:id' component={OneRepo} />
-            </Switch>
+            <React.Fragment>
+                    <Button onClick={this.handleLogout} style={{opacity: `${Number(this.props.user.loggedIn)}`}}>Logout</Button>
+                <Switch>
+                    <Route exact path='/' component={App} />
+                    <Route exact path='/login' component={Login} />
+                    <Route exact path='/repos/notfound' component={NotFound} />
+                    <Route exact path='/:id' component={ListOfCommits} />
+                </Switch>
+            </React.Fragment>
         )
     }
 }
@@ -50,7 +61,7 @@ store.subscribe(() => {
 
 
 
-const RootWithRouter = withRouter(connect(mapStateToProps, null)(Root))
+const RootWithRouter = withRouter(connect(mapStateToProps, { logout })(Root))
 
 ReactDOM.render(
     <Provider store={store}>

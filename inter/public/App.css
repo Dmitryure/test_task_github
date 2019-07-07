@@ -2,11 +2,42 @@ body {
     padding: 50px;
 }
 
-.profilepic {
-    
+@keyframes animateProfilePic {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 
-@keyframes profilepic {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
+.profilePic {
+    animation-name: animateProfilePic;
+    animation-duration: 0.8s;
+}
+
+@keyframes animateSingleRepo {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.singleRepo {
+    animation-name: animateSingleRepo;
+    animation-duration: 1.5s;
+}
+
+@keyframes animateProfileData {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.profileData {
+    animation-name: animateProfileData;
+    animation-duration: 3s
+}
+
+@keyframes animateSingleRepo {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes animateSingleCommit {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
