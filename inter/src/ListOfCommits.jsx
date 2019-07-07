@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
-import { Grid, Image, Button, Icon } from 'semantic-ui-react'
-import {Link} from 'react-router-dom'
+import { Grid, Image} from 'semantic-ui-react'
 import Moment from 'react-moment'
+import MainPageButton from './MainPageButton';
 
 const ListOfCommits = (props) => {
     const [commitsData, setCommitsData] = useState('')
@@ -45,11 +45,7 @@ const ListOfCommits = (props) => {
 
     return (
         <React.Fragment>
-            <Link to={'/'}>
-                <Button>
-                    <Icon name={'backward'} ></Icon> Вернуться на главную страницу
-                </Button>
-            </Link>
+            <MainPageButton/>
             <br/>
             {commitsData ? commitsData.commits.map((commit, index) => {
                 return (

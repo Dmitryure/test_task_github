@@ -1,5 +1,12 @@
 body {
-    padding: 50px;
+    padding: 8px;
+    margin: 8px;
+}
+
+.logoutButton {
+    position: absolute;
+    top: 0%;
+    right: 0%;
 }
 
 @keyframes animateProfilePic {
@@ -40,4 +47,52 @@ body {
 @keyframes animateSingleCommit {
     from {opacity: 0;}
     to {opacity: 1;}
+}
+
+.mainPageButton {
+    position: absolute;
+    top: 0%;
+    left: 5%;
+}
+
+.error {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: inherit;
+    font-size: 48px;
+}
+
+.beforeSubmitForm{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    opacity: 1;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+
+.submitForm {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    opacity: 0.3;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+
+@keyframes animateFormHover {
+    from {opacity: 0.3;}
+    to {opacity: 1;}
+}
+
+.submitForm:hover{
+    animation-name: animateFormHover;
+    animation-duration: 0.6s;
+    animation-fill-mode:forwards;
 }

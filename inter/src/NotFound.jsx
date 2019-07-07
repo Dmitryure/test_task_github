@@ -1,17 +1,14 @@
 import React from 'react'
-import { Button, Icon } from 'semantic-ui-react'
-import {Link} from 'react-router-dom'
+import MainPageButton from './MainPageButton';
 
 const NotFound = (props) => {
     return (
-
         <React.Fragment>
-            <Link to={'/'}>
-                <Button>
-                <Icon name={'backward'} ></Icon> Вернуться на главную страницу 
-                </Button>
-            </Link>
-            <div>Not found</div>
+            <MainPageButton />
+            <div className={'error'}>
+                <p>Ошибка 404</p>
+                <p>Страница не найдена</p>
+            </div>
         </React.Fragment>
     )
 }

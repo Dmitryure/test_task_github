@@ -8,9 +8,7 @@ class App extends React.Component {
 
     render(){
         return(
-            <React.Fragment>
-                <GitLoader/>
-            </React.Fragment>
+                <div id = 'GitLoader'><GitLoader/></div>
         )
     }
 }

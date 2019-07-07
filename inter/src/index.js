@@ -39,7 +39,8 @@ class Root extends React.Component {
     render() {
         return (
             <React.Fragment>
-                    <Button onClick={this.handleLogout} style={{opacity: `${Number(this.props.user.loggedIn)}`}}>Logout</Button>
+                    <Button onClick={this.handleLogout} className = {'logoutButton'}
+                    style={{opacity: `${Number(this.props.user.loggedIn)}`}}>Logout</Button>
                 <Switch>
                     <Route exact path='/' component={App} />
                     <Route exact path='/login' component={Login} />

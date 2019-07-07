@@ -26,8 +26,8 @@ const Table1 = (props) => {
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
-            <Grid>
-                <Grid.Row columns={3} divided>
+            <Grid celled={'internally'} padded ={'horizontally'} >
+                <Grid.Row columns={3}>
                     {data ? data.map((repo) => {
                         return <SingleRepo key={repo.id} repoInfo={repo} id={id++} />
                     }) : ''}

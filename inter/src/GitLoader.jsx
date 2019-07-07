@@ -12,7 +12,8 @@ const GitLoader = (props) => {
         name: '',
         repos: '',
     })
-
+    const [error, setError] = useState('')
+    const [styleClass, setStyleClass] = useState('beforeSubmitForm')
     const [query, setQuery] = useState('')
     const [search, setSearch] = useState('')
 
@@ -23,25 +24,27 @@ const GitLoader = (props) => {
         }
     }
 
-
-
     useEffect(() => {
         const fetchData = async () => {
-            if (search) {
-                const profileResult = await axios(
-                    `https://api.github.com/users/${search}`, config
-                );
+            try {
+                if (search) {
+                    const profileResult = await axios(
+                        `https://api.github.com/users/${search}`, config
+                    );
 
-                const reposResult = await axios(
-                    `https://api.github.com/users/${search}/repos`, config
-                )
+                    const reposResult = await axios(
+                        `https://api.github.com/users/${search}/repos`, config
+                    )
 
-                setProfileData({
-                    avatar_url: profileResult.avatar_url,
-                    login: profileResult.login,
-                    name: profileResult.name,
-                    repos: reposResult
-                })
+                    setProfileData({
+                        avatar_url: profileResult.avatar_url,
+                        login: profileResult.login,
+                        name: profileResult.name,
+                        repos: reposResult
+                    })
+                }
+            } catch (error) {
+                setError(error)
             }
         };
 
@@ -50,18 +53,45 @@ const GitLoader = (props) => {
     if (profileData.repos) {
         props.oneRepo(profileData)
     }
-    return (
-        <React.Fragment>
-            <input
-                value={query}
-                name="username"
-                onChange={event => setQuery(event.target.value)}
-            />
-            <Button onClick={() => setSearch(query)}>
-                Submit
-        </Button>
-            <Table1 data={profileData} />
+
+    let result;
+    if (error) {
+        console.log('error')
+        result =
+            <React.Fragment>
+                <div className={styleClass}>
+                    Имя не найдено, попробуйте другое
+                <input
+                        value={query}
+                        name="username"
+                        onChange={event => setQuery(event.target.value)}
+                    />
+                    <Button onClick={() => { setSearch(query); setStyleClass('submitForm') }}>
+                        Submit
+                </Button>
+                </div>
         </React.Fragment>
+    } else {
+        result =
+            <React.Fragment>
+                <div className={styleClass}>
+                    Введите имя пользователя Github:
+                <input
+                        value={query}
+                        name="username"
+                        onChange={event => setQuery(event.target.value)}
+                    />
+                    <Button onClick={() => { setSearch(query); setStyleClass('submitForm') }}>
+                        Submit
+                </Button>
+                </div>
+                <Table1 data={profileData} />
+
+            </React.Fragment>
+    }
+
+    return (
+        result
     )
 }
 
