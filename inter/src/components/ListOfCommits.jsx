@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Grid, Image} from 'semantic-ui-react'
 import Moment from 'react-moment'
 import MainPageButton from './MainPageButton';
+import {useCommits} from './useCommits'
 
 const ListOfCommits = (props) => {
     const [commitsData, setCommitsData] = useState('')
@@ -27,21 +28,7 @@ const ListOfCommits = (props) => {
         }
     }
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const commits = await axios(
-                `https://api.github.com/repos/${repoData.owner}/${repoData.name}/commits`, config
-            )
-            setCommitsData({
-                commits: commits['data']
-            })
-        }
-        if (!repoData.owner) {
-            props.history.push('/repos/notfound')
-        }
-        fetchData()
-
-    }, [])
+    useCommits(repoData, setCommitsData, props)
 
     return (
         <React.Fragment>

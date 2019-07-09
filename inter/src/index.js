@@ -1,5 +1,5 @@
 import React from 'react'
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter as Router, Switch, Route, withRouter } from 'react-router-dom'
 import ReactDOM from 'react-dom';
 import { Provider, connect } from 'react-redux'
@@ -11,10 +11,13 @@ import Login from './components/Login'
 import { logout } from './redux/actions/logout'
 import { Button } from 'semantic-ui-react'
 import NotFound from './components/NotFound'
+import thunk from 'redux-thunk'
+
 
 
 const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {}
-const store = createStore(rootReducer, persistedState, composeWithDevTools())
+const composeEnhancers = composeWithDevTools({})
+const store = createStore(rootReducer, persistedState, composeEnhancers(applyMiddleware(thunk)))
 
 
 class Root extends React.Component {
